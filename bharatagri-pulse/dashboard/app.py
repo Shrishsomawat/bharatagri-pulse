@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import os
 import plotly.express as px
+
+MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "models")
 
 # === Page Config ===
 st.set_page_config(page_title="BharatAgri Pulse", layout="centered")
@@ -10,8 +13,8 @@ st.title("🌾 BharatAgri Pulse: Crop Yield Prediction")
 st.markdown("📍 Select your inputs below to predict **Crop Yield (in kg/ha)**.")
 
 # === Load Model and Encoder ===
-model = joblib.load("C:/Users/ssomawat/Desktop/bharatagri-pulse/models/yield_model.pkl")
-encoder = joblib.load("C:/Users/ssomawat/Desktop/bharatagri-pulse/models/encoder.pkl")
+model = joblib.load(os.path.join(MODELS_DIR, "yield_model.pkl"))
+encoder = joblib.load(os.path.join(MODELS_DIR, "encoder.pkl"))
 
 # === Input UI ===
 state = st.selectbox("🗺️ State", ['Assam', 'Punjab', 'Maharashtra', 'Karnataka', 'Tamil Nadu'])
