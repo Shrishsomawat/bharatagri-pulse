@@ -7,8 +7,10 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import joblib
 import os
 
+BASE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+
 # Step 1: Load merged data
-data_path = "C:/Users/ssomawat/Desktop/bharatagri-pulse/data/cleaned/final_merged_data.csv"
+data_path = os.path.join(BASE_DIR, "data", "cleaned", "final_merged_data.csv")
 data = pd.read_csv(data_path)
 
 # Step 1.5: Convert YIELD to kg/ha if needed
@@ -47,7 +49,7 @@ print(f"MAE: {mean_absolute_error(y_test, y_pred):.4f}")
 print(f"RMSE: {np.sqrt(mean_squared_error(y_test, y_pred)):.4f}")
 
 # Step 9: Save model and encoder
-model_dir = "C:/Users/ssomawat/Desktop/bharatagri-pulse/models"
+model_dir = os.path.join(BASE_DIR, "models")
 os.makedirs(model_dir, exist_ok=True)
 
 joblib.dump(model, os.path.join(model_dir, "yield_model.pkl"))
